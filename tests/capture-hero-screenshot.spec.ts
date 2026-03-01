@@ -14,18 +14,14 @@ test('capture README hero screenshot', async ({ apiSpecPage: page }) => {
   await page.setViewportSize({ width: 1400, height: 900 });
 
   // ── Step 1: Add an annotation on the "Architecture Overview" heading ──
-  // Click the heading to open the sheet
   const archHeading = page.locator('.el-h2', { hasText: 'Architecture Overview' });
   await archHeading.click();
   await expect(page.locator('.sheet.open')).toBeVisible();
 
-  // Wait for textarea focus, type comment, submit
   const sheetTextarea = page.locator('.sheet textarea');
   await expect(sheetTextarea).toBeFocused({ timeout: 5000 });
   await sheetTextarea.fill('Looks great — should we add a fallback if Redis is unavailable?');
   await page.locator('.sheet-send.active').click();
-
-  // Wait for the annotation dot to appear
   await expect(page.locator('.ann-dot').first()).toBeVisible({ timeout: 10000 });
 
   // ── Step 2: Add a second annotation on the "Rate Limiting" section ──
@@ -38,17 +34,20 @@ test('capture README hero screenshot', async ({ apiSpecPage: page }) => {
   await page.locator('.sheet-send.active').click();
   await expect(page.locator('.ann-dot').nth(1)).toBeVisible({ timeout: 10000 });
 
-  // ── Step 3: Scroll up and open comment drawer on a paragraph with in-progress text ──
-  // Click the intro paragraph to open the sheet with a draft comment
-  const introParagraph = page.locator('.el-p').first();
-  await introParagraph.scrollIntoViewIfNeeded();
-  await introParagraph.click();
+  // ── Step 3: Scroll so mermaid, code, and question are visible ──
+  // Click the Create User heading to open the comment drawer mid-page
+  const createUserHeading = page.locator('.el-h2', { hasText: 'Create User' });
+  await createUserHeading.scrollIntoViewIfNeeded();
+  await createUserHeading.click();
   await expect(page.locator('.sheet.open')).toBeVisible();
   await expect(sheetTextarea).toBeFocused({ timeout: 5000 });
   await sheetTextarea.fill('Can we also cover the migration path from v1?');
 
+  // Scroll so the Architecture Overview heading is near the top — this positions
+  // the mermaid diagram, code block, and question all within the viewport.
+  await archHeading.scrollIntoViewIfNeeded();
+
   // ── Step 4: Capture the screenshot ──
-  // Small delay to let any animations settle
   await page.waitForTimeout(500);
 
   const screenshot = await page.screenshot({ clip: { x: 0, y: 0, width: 1400, height: 900 } });
