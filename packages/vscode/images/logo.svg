@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Background -->
+  <rect width="128" height="128" rx="20" fill="#1e1e2e"/>
+
+  <!-- Document body -->
+  <rect x="28" y="22" width="60" height="76" rx="5" fill="#2a2a3e" stroke="#3d3d5c" stroke-width="1.5"/>
+
+  <!-- Document lines -->
+  <rect x="36" y="36" width="44" height="4" rx="2" fill="#6c6c9a"/>
+  <rect x="36" y="46" width="36" height="3" rx="1.5" fill="#4a4a6a"/>
+  <rect x="36" y="55" width="40" height="3" rx="1.5" fill="#4a4a6a"/>
+  <rect x="36" y="64" width="30" height="3" rx="1.5" fill="#4a4a6a"/>
+  <rect x="36" y="73" width="38" height="3" rx="1.5" fill="#4a4a6a"/>
+  <rect x="36" y="82" width="24" height="3" rx="1.5" fill="#4a4a6a"/>
+
+  <!-- Annotation dot (accent) -->
+  <circle cx="92" cy="76" r="18" fill="#1e1e2e"/>
+  <circle cx="92" cy="76" r="14" fill="#4f9cf9"/>
+  <!-- Pencil / edit symbol inside dot -->
+  <g transform="translate(92,76)" fill="white">
+    <rect x="-4" y="-7" width="8" height="10" rx="1.5" fill="white"/>
+    <polygon points="-4,3 4,3 0,9" fill="white"/>
+    <rect x="-4" y="-9" width="8" height="3" rx="1" fill="#a8c8ff"/>
+  </g>
+</svg>

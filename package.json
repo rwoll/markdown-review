@@ -1,0 +1,21 @@
+{
+  "name": "markdown-review",
+  "private": true,
+  "workspaces": [
+    "packages/core",
+    "packages/web",
+    "packages/markdown-review",
+    "packages/vscode",
+    "packages/copilot-plugin"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=packages/core && npm run build --workspace=packages/web && npm run build --workspace=packages/markdown-review && npm run build --workspace=packages/vscode",
+    "dev": "npm run dev --workspace=packages/core & npm run dev --workspace=packages/web",
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "typescript": "^5.7.0"
+  },
+  "license": "MIT"
+}

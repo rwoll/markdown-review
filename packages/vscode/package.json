@@ -1,0 +1,75 @@
+{
+  "name": "markdown-review-vscode",
+  "displayName": "Markdown Review",
+  "description": "Interactive plan review UI for markdown files",
+  "version": "0.0.3",
+  "publisher": "rwoll",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rwoll/markdown-review.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "badges": [
+    {
+      "url": "https://img.shields.io/visual-studio-marketplace/v/rwoll.markdown-review",
+      "href": "https://marketplace.visualstudio.com/items?itemName=rwoll.markdown-review",
+      "description": "VS Code Marketplace Version"
+    },
+    {
+      "url": "https://img.shields.io/visual-studio-marketplace/i/rwoll.markdown-review",
+      "href": "https://marketplace.visualstudio.com/items?itemName=rwoll.markdown-review",
+      "description": "VS Code Marketplace Installs"
+    }
+  ],
+  "icon": "images/logo.png",
+  "main": "./dist/extension.js",
+  "files": [
+    "dist/**",
+    "markdown-plan-review-feedback/**",
+    "images/**",
+    "README.md"
+  ],
+  "contributes": {
+    "chatSkills": [{
+      "path": "./markdown-plan-review-feedback/SKILL.md"
+    }],
+    "commands": [
+      {
+        "command": "planReview.open",
+        "title": "Plan Review: Open"
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "planReview.markdownEditor",
+        "displayName": "Markdown Review",
+        "selector": [
+          { "filenamePattern": "*.md" }
+        ],
+        "priority": "default"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "resourceExtname == .md",
+          "command": "planReview.open",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.config.mjs"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.25.0"
+  }
+}

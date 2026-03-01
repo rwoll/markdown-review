@@ -1,0 +1,13 @@
+{
+  "name": "markdown-review",
+  "description": "Interactive plan review UI — annotate markdown, answer embedded questions, export structured feedback",
+  "version": "0.1.0",
+  "author": {
+    "name": "rwoll"
+  },
+  "repository": "https://github.com/rwoll/markdown-review",
+  "license": "MIT",
+  "keywords": ["review", "plan", "feedback", "markdown", "annotation"],
+  "category": "productivity",
+  "skills": "skills/"
+}

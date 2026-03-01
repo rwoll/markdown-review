@@ -1,0 +1,22 @@
+# Feedback: PLAN.md
+
+- **File:** `PLAN.md`
+- **Generated:** <TIMESTAMP>
+- **Questions answered:** 0 / 0
+- **Inline comments:** 1
+- **General notes:** 0
+
+---
+
+## Inline Annotations
+
+### PLAN.md:L2-L2
+```
+file:  PLAN.md
+lines: L2-L2
+type:  p
+```
+**Comment**
+
+This section needs more detail
+

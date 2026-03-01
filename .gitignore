@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+*.vsix
+playwright-report/
+test-results/
+packages/review-markdown/bin/

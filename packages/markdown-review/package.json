@@ -1,0 +1,41 @@
+{
+  "name": "markdown-review",
+  "version": "0.0.3",
+  "description": "Interactive markdown plan review UI — annotate, answer questions, export feedback",
+  "author": "rwoll <ross.wollman@gmail.com>",
+  "type": "module",
+  "bin": {
+    "markdown-review": "bin/markdown-review.js"
+  },
+  "files": [
+    "bin/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vite": "^6.0.0",
+    "@plan-review/core": "*"
+  },
+  "keywords": [
+    "markdown",
+    "review",
+    "feedback",
+    "plan",
+    "annotation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rwoll/markdown-review.git",
+    "directory": "packages/markdown-review"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

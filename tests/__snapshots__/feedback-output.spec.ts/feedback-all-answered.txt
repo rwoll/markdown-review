@@ -1,0 +1,48 @@
+# Feedback: PLAN.md
+
+- **File:** `PLAN.md`
+- **Generated:** <TIMESTAMP>
+- **Questions answered:** 3 / 3
+- **Inline comments:** 0
+- **General notes:** 0
+
+---
+
+## Question Responses
+
+### What do you think about this?
+```
+file:  PLAN.md
+lines: L9-L12
+type:  question:open
+id:    test-open
+```
+**Answer:**
+
+Looks good to me
+
+### Pick one
+```
+file:  PLAN.md
+lines: L14-L18
+type:  question:choice
+id:    test-choice
+```
+**Selection:**
+
+- Beta
+
+### Select all that apply
+```
+file:  PLAN.md
+lines: L20-L24
+type:  question:checkbox
+id:    test-checkbox
+```
+**Selection:**
+
+- Red
+- Blue
+
+---
+
