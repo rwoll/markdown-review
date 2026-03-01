@@ -20,6 +20,10 @@
 
 ![Plan Review showing an API spec with annotations in the sidebar and the comment drawer open](packages/vscode/images/hero-screenshot.png)
 
+### Demo
+
+![Demo of the Plan Review annotation workflow](packages/vscode/images/hero-demo.gif)
+
 ---
 
 Plan Review is a single review UI deployed across three surfaces — all sharing a core bundle built with **Preact** and **TypeScript**.

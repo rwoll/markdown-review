@@ -32,6 +32,10 @@ AI coding agents are great at implementation — but most of your time is spent 
 
 ![Plan Review showing an API spec with annotations in the sidebar and the comment drawer open](images/hero-screenshot.png)
 
+### Demo
+
+![Demo of the Plan Review annotation workflow](images/hero-demo.gif)
+
 ---
 
 ## Features

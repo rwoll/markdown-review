@@ -19,6 +19,10 @@
 
 ![Plan Review showing an API spec with annotations in the sidebar and the comment drawer open](../vscode/images/hero-screenshot.png)
 
+### Demo
+
+![Demo of the Plan Review annotation workflow](../vscode/images/hero-demo.gif)
+
 ---
 
 `markdown-review` is a zero-install CLI that opens a local browser UI for
