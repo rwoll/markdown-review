@@ -46,6 +46,38 @@ test('capture README hero video', async ({ page }) => {
   await expect(page.locator('.mermaid-body svg').first()).toBeVisible({ timeout: 15000 });
   await expect(page.locator('.el-h1')).toBeVisible();
 
+  // Inject a blue click-indicator dot that appears at each click location
+  await page.evaluate(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes click-ring {
+        0%   { transform: translate(-50%, -50%) scale(0.5); opacity: 0.9; }
+        100% { transform: translate(-50%, -50%) scale(2.0); opacity: 0; }
+      }
+      .click-dot {
+        position: fixed;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(56, 132, 255, 0.5);
+        border: 2px solid rgba(56, 132, 255, 0.8);
+        pointer-events: none;
+        z-index: 999999;
+        animation: click-ring 0.5s ease-out forwards;
+      }
+    `;
+    document.head.appendChild(style);
+
+    document.addEventListener('mousedown', (e) => {
+      const dot = document.createElement('div');
+      dot.className = 'click-dot';
+      dot.style.left = e.clientX + 'px';
+      dot.style.top = e.clientY + 'px';
+      document.body.appendChild(dot);
+      setTimeout(() => dot.remove(), 500);
+    }, true);
+  });
+
   // Pause to show the initial document
   await page.waitForTimeout(1500);
 
