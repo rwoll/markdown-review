@@ -5,4 +5,4 @@ dist/
 *.vsix
 playwright-report/
 test-results/
-packages/review-markdown/bin/
+packages/markdown-review/bin/
