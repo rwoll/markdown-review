@@ -13,6 +13,12 @@ graph LR
     US --> DB[(PostgreSQL)]
 ```
 
+```question:choice
+id: q-auth-strategy
+question: Which authentication strategy should the gateway use?
+options: JWT with short-lived tokens | OAuth 2.0 + opaque tokens | API key per client | Session cookies
+```
+
 ## Create User
 
 The `POST /users` endpoint accepts a JSON body and returns the created resource:
@@ -23,18 +29,6 @@ interface CreateUserRequest {
   displayName: string;
   role: "admin" | "editor" | "viewer";
 }
-
-async function createUser(req: CreateUserRequest): Promise<User> {
-  const existing = await db.users.findByEmail(req.email);
-  if (existing) throw new ConflictError("email already registered");
-  return db.users.insert({ ...req, createdAt: new Date() });
-}
-```
-
-```question:choice
-id: q-auth-strategy
-question: Which authentication strategy should the gateway use?
-options: JWT with short-lived tokens | OAuth 2.0 + opaque tokens | API key per client | Session cookies
 ```
 
 ## Rate Limiting
