@@ -39,6 +39,6 @@ options: JWT with short-lived tokens | OAuth 2.0 + opaque tokens | API key per c
 
 ## Rate Limiting
 
-Requests are throttled using a sliding-window algorithm. Defaults are **100 req/min** per API key, configurable per tier.
+Requests are throttled using a sliding-window algorithm. Defaults are **100 requests per minute** per API key, configurable per tier.
 
 > **Note:** Burst allowances may be granted to internal services on a case-by-case basis. Contact the platform team.
