@@ -51,6 +51,8 @@ type PlanReviewFixtures = {
   postFeedbackPage: Page;
   /** Page already navigated to the /mermaid route (markdown with mermaid diagram and images). */
   mermaidPage: Page;
+  /** Page already navigated to the /api-spec route (mock API spec with questions, mermaid, and code). */
+  apiSpecPage: Page;
 };
 
 export const test = base.extend<PlanReviewFixtures>({
@@ -82,6 +84,13 @@ export const test = base.extend<PlanReviewFixtures>({
 
   mermaidPage: async ({ page }, use) => {
     await page.goto('/mermaid');
+    // Wait for the mermaid diagram to render (SVG appears in .mermaid-body)
+    await expect(page.locator('.mermaid-body svg').first()).toBeVisible({ timeout: 15000 });
+    await use(page);
+  },
+
+  apiSpecPage: async ({ page }, use) => {
+    await page.goto('/api-spec');
     // Wait for the mermaid diagram to render (SVG appears in .mermaid-body)
     await expect(page.locator('.mermaid-body svg').first()).toBeVisible({ timeout: 15000 });
     await use(page);
