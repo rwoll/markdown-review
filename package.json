@@ -15,6 +15,9 @@
     "test": "npx playwright test"
   },
   "devDependencies": {
+    "@ffmpeg/core": "^0.12.10",
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
     "@playwright/test": "^1.58.2",
     "typescript": "^5.7.0"
   },
