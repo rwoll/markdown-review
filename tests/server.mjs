@@ -82,7 +82,7 @@ const server = createServer((req, res) => {
 
   if (url.pathname === '/api-spec') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(makeHtml(apiSpecMd, 'API Spec'));
+    res.end(makeHtml(apiSpecMd, 'API Spec', { feedbackMode: 'vscode' }));
     return;
   }
 
