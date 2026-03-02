@@ -57,13 +57,7 @@ Use [Conventional Commits](https://www.conventionalcommits.org/) style:
 
 ## Project Structure
 
-| Package | Purpose |
-|---------|---------|
-| `packages/core` | Shared UI (Preact IIFE) |
-| `packages/web` | Static web app |
-| `packages/markdown-review` | npm CLI |
-| `packages/vscode` | VS Code extension |
-| `packages/copilot-plugin` | Copilot CLI plugin |
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the full package layout and build order.
 
 ## Code Style
 

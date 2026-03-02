@@ -6,3 +6,7 @@ dist/
 playwright-report/
 test-results/
 packages/markdown-review/bin/
+
+# Generated — copied from root README.md at build time
+packages/markdown-review/README.md
+packages/vscode/README.md
