@@ -208,7 +208,7 @@ export function NotesPanel() {
         <div class="panel-head">
           <span class="panel-title">Notes & Answers</span>
           <div class="panel-actions">
-            <button class={`panel-export${feedbackMode.value === 'vscode' ? (hasContent ? ' copilot-active' : ' copilot-dim') : ''}`} onClick={downloadFeedback}>{feedbackMode.value === 'vscode' ? <><CopilotIcon /> Send to Copilot →</> : '↓ Export'}</button>
+            <button class={`panel-export${feedbackMode.value === 'vscode' ? (hasContent ? ' copilot-active' : ' copilot-dim') : ''}`} onClick={downloadFeedback}>{feedbackMode.value === 'vscode' ? <><CopilotIcon /> Send to Copilot</> : '↓ Export'}</button>
             <button class="panel-close" onClick={togglePanel}>×</button>
           </div>
         </div>
@@ -289,7 +289,7 @@ export function NotesPanel() {
 
         {hasContent && (
           <div class="panel-footer">
-            <button class={`panel-dl${feedbackMode.value === 'vscode' ? ' copilot-active' : ''}`} onClick={downloadFeedback}>{feedbackMode.value === 'vscode' ? <><CopilotIcon /> Send to Copilot →</> : `↓ Download ${fileName.value.replace(/\.md$/i, '')}-feedback.md`}</button>
+            <button class={`panel-dl${feedbackMode.value === 'vscode' ? ' copilot-active' : ''}`} onClick={downloadFeedback}>{feedbackMode.value === 'vscode' ? <><CopilotIcon /> Send to Copilot</> : `↓ Download ${fileName.value.replace(/\.md$/i, '')}-feedback.md`}</button>
             <div class="panel-dl-cap">Markdown · questions, snippets & comments</div>
           </div>
         )}

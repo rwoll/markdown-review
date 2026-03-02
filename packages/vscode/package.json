@@ -2,7 +2,7 @@
   "name": "markdown-review-vscode",
   "displayName": "Markdown Review",
   "description": "Interactive plan review UI for markdown files",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "publisher": "rwoll",
   "repository": {
     "type": "git",

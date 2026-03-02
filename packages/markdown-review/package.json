@@ -1,6 +1,6 @@
 {
   "name": "markdown-review",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Interactive markdown plan review UI — annotate, answer questions, export feedback",
   "author": "rwoll <ross.wollman@gmail.com>",
   "type": "module",
