@@ -140,15 +140,15 @@ test.afterAll(async () => {
   const gifPath = resolve(__dirname, '..', 'packages', 'vscode', 'images', 'hero-demo.gif');
 
   // ── Load @ffmpeg/core (WebAssembly) directly in Node.js ──
+  const corePath = resolve(__dirname, '..', 'node_modules', '@ffmpeg', 'core', 'dist', 'umd', 'ffmpeg-core.js');
+  const wasmPath = resolve(__dirname, '..', 'node_modules', '@ffmpeg', 'core', 'dist', 'umd', 'ffmpeg-core.wasm');
+
   // Polyfill browser globals that Emscripten expects
   if (typeof globalThis.self === 'undefined') (globalThis as Record<string, unknown>).self = globalThis;
   if (typeof globalThis.location === 'undefined') {
-    const corePath = resolve(__dirname, '..', 'node_modules', '@ffmpeg', 'core', 'dist', 'umd', 'ffmpeg-core.js');
     (globalThis as Record<string, unknown>).location = { href: pathToFileURL(corePath).toString() };
   }
 
-  const corePath = resolve(__dirname, '..', 'node_modules', '@ffmpeg', 'core', 'dist', 'umd', 'ffmpeg-core.js');
-  const wasmPath = resolve(__dirname, '..', 'node_modules', '@ffmpeg', 'core', 'dist', 'umd', 'ffmpeg-core.wasm');
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const createFFmpegCore = require(corePath);
   const wasmBinary = readFileSync(wasmPath);
@@ -160,9 +160,11 @@ test.afterAll(async () => {
   // Two-pass approach: generate palette, then use it for the gif
   ffmpeg.FS.writeFile('input.webm', webmData);
 
+  // Disable timeout — conversion duration depends on video length
   ffmpeg.setTimeout(-1);
   ffmpeg.exec('-y', '-i', 'input.webm', '-vf', 'fps=12,scale=700:-1:flags=lanczos,palettegen=stats_mode=diff', 'palette.png');
   if (ffmpeg.ret !== 0) throw new Error(`ffmpeg palette generation failed with code ${ffmpeg.ret}`);
+  // Reset internal state between exec calls
   ffmpeg.reset();
 
   ffmpeg.setTimeout(-1);
