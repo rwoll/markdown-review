@@ -138,8 +138,12 @@ body{background:#111;color:#999;font-family:-apple-system,BlinkMacSystemFont,'Se
 .panel-title{font-size:13px;font-weight:600;color:#e0e0e0}
 .panel-actions{display:flex;gap:12px;align-items:center}
 .panel-export{font-size:11px;color:#555;background:none;border:1px solid rgba(255,255,255,.1);border-radius:6px;
-  padding:4px 10px;cursor:pointer;font-family:inherit}
+  padding:4px 10px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:5px;transition:all .2s}
 .panel-export:hover{color:#aaa;border-color:rgba(255,255,255,.2)}
+.panel-export.copilot-dim{color:rgba(56,132,255,.55);border-color:rgba(56,132,255,.2);background:rgba(56,132,255,.06)}
+.panel-export.copilot-dim:hover{color:rgba(56,132,255,.75);border-color:rgba(56,132,255,.35)}
+.panel-export.copilot-active{color:#fff;border-color:#388bfd;background:#388bfd}
+.panel-export.copilot-active:hover{background:#1f6feb}
 .panel-close{font-size:18px;color:#444;background:none;border:none;cursor:pointer}
 .panel-close:hover{color:#888}
 .panel-section{padding:0 20px 16px}
@@ -155,8 +159,12 @@ body{background:#111;color:#999;font-family:-apple-system,BlinkMacSystemFont,'Se
 .panel-c-label{font-size:10px;color:#444;font-family:monospace;margin-bottom:3px}
 .panel-footer{padding:16px 20px 28px;flex-shrink:0;margin-top:auto}
 .panel-dl{width:100%;padding:12px;border-radius:10px;background:#fff;color:#111;border:none;
-  font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+  font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all .2s}
 .panel-dl:hover{background:#e8e8e8}
+.panel-dl.copilot-dim{background:rgba(56,132,255,.15);color:rgba(56,132,255,.6);border:1px solid rgba(56,132,255,.15)}
+.panel-dl.copilot-dim:hover{background:rgba(56,132,255,.22);color:rgba(56,132,255,.75)}
+.panel-dl.copilot-active{background:#388bfd;color:#fff;border:none}
+.panel-dl.copilot-active:hover{background:#1f6feb}
 .panel-dl-cap{font-size:11px;color:#333;text-align:center;margin-top:6px}
 .panel-empty{color:#333;font-size:13px;padding:40px 20px;text-align:center}
 
