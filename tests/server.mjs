@@ -25,6 +25,7 @@ const basicMd = readFileSync(resolve(root, 'packages/core/tests/fixtures/basic.m
 const questionsMd = readFileSync(resolve(root, 'packages/core/tests/fixtures/with-questions.md'), 'utf-8');
 const invalidQtypeMd = readFileSync(resolve(root, 'packages/core/tests/fixtures/invalid-qtype.md'), 'utf-8');
 const mermaidMd = readFileSync(resolve(root, 'packages/core/tests/fixtures/with-mermaid.md'), 'utf-8');
+const apiSpecMd = readFileSync(resolve(root, 'packages/core/tests/fixtures/api-spec.md'), 'utf-8');
 
 function makeHtml(markdown, title, options = {}) {
   const escapedMd = JSON.stringify(markdown);
@@ -76,6 +77,12 @@ const server = createServer((req, res) => {
   if (url.pathname === '/mermaid') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(makeHtml(mermaidMd, 'Mermaid Diagrams'));
+    return;
+  }
+
+  if (url.pathname === '/api-spec') {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end(makeHtml(apiSpecMd, 'API Spec'));
     return;
   }
 

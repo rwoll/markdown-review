@@ -28,37 +28,13 @@ AI coding agents are great at implementation — but most of your time is spent 
 
 ---
 
-## Screenshots
+## Screenshot
 
-### Main Review Surface
+![Plan Review showing an API spec with annotations in the sidebar and the comment drawer open](images/hero-screenshot.png)
 
-Open any `.md` file with Plan Review to see a clean, readable document with a live outline and a notes panel on the right.
+### Demo
 
-![Main review surface](images/main-review-desktop.png)
-
-### Embedded AI Questions
-
-AI-authored question blocks are rendered inline. Reviewers answer them without leaving the document.
-
-![Questions unanswered](images/questions-unanswered.png)
-
-### Answering a Question
-
-Type a response, hit **Submit**, and the question collapses into an answered state in the notes panel.
-
-![Question answered](images/question-answered.png)
-
-### Inline Annotations
-
-Click any paragraph, heading, list item, or code block to open the annotation sheet and leave a comment.
-
-![Inline annotation sheet open](images/inline-annotation.png)
-
-### Annotation Markers
-
-After submitting a comment, a dot marker appears on the block and the note appears in the right-hand panel.
-
-![Annotation dot visible](images/annotation-dot.png)
+![Demo of the Plan Review annotation workflow](images/hero-demo.gif)
 
 ---
 

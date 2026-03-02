@@ -1,10 +1,29 @@
-# markdown-review
+<p align="center">
+  <img src="../vscode/images/logo.png" width="160" height="160" alt="Plan Review logo">
+</p>
 
-[![npm version](https://img.shields.io/npm/v/markdown-review)](https://www.npmjs.com/package/markdown-review)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/rwoll/markdown-review/blob/main/LICENSE)
+<h1 align="center">markdown-review</h1>
 
-> Interactive markdown plan review UI — annotate sections, answer AI-agent
-> embedded questions, and export structured feedback.
+<p align="center">
+  <a href="https://www.npmjs.com/package/markdown-review"><img src="https://img.shields.io/npm/v/markdown-review" alt="npm version"></a>
+  <a href="https://github.com/rwoll/markdown-review/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+</p>
+
+<p align="center">
+  <strong>Interactive markdown plan review UI — annotate sections, answer AI-agent embedded questions, and export structured feedback.</strong>
+</p>
+
+---
+
+## Screenshot
+
+![Plan Review showing an API spec with annotations in the sidebar and the comment drawer open](../vscode/images/hero-screenshot.png)
+
+### Demo
+
+![Demo of the Plan Review annotation workflow](../vscode/images/hero-demo.gif)
+
+---
 
 `markdown-review` is a zero-install CLI that opens a local browser UI for
 reviewing markdown plans. It is part of the

@@ -1,11 +1,30 @@
-# Plan Review UI
+<p align="center">
+  <img src="packages/vscode/images/logo.png" width="160" height="160" alt="Plan Review logo">
+</p>
 
-[![Copilot CLI Plugin Available](https://img.shields.io/badge/Copilot%20CLI%20Plugin-Available-24292f?logo=github)](#copilot-cli-plugin)
-[![Install in VS Code](https://img.shields.io/badge/VS%20Code-Install-0078d4?logo=visualstudiocode&logoColor=white)](vscode:extension/rwoll.markdown-review)
-[![Install in VS Code Insiders](https://img.shields.io/badge/VS%20Code%20Insiders-Install-24bfa5?logo=visualstudiocode&logoColor=white)](vscode-insiders:extension/rwoll.markdown-review)
+<h1 align="center">Plan Review</h1>
 
-> Interactive plan review UI for markdown files — annotate sections,
-> answer AI-agent embedded questions, and export structured feedback.
+<p align="center">
+  <strong>Interactive plan review UI for markdown files — annotate sections, answer AI-agent embedded questions, and export structured feedback.</strong>
+</p>
+
+<p align="center">
+  <a href="#copilot-cli-plugin"><img src="https://img.shields.io/badge/Copilot%20CLI%20Plugin-Available-24292f?logo=github" alt="Copilot CLI Plugin Available"></a>
+  <a href="vscode:extension/rwoll.markdown-review"><img src="https://img.shields.io/badge/VS%20Code-Install-0078d4?logo=visualstudiocode&logoColor=white" alt="Install in VS Code"></a>
+  <a href="vscode-insiders:extension/rwoll.markdown-review"><img src="https://img.shields.io/badge/VS%20Code%20Insiders-Install-24bfa5?logo=visualstudiocode&logoColor=white" alt="Install in VS Code Insiders"></a>
+</p>
+
+---
+
+## Screenshot
+
+![Plan Review showing an API spec with annotations in the sidebar and the comment drawer open](packages/vscode/images/hero-screenshot.png)
+
+### Demo
+
+![Demo of the Plan Review annotation workflow](packages/vscode/images/hero-demo.gif)
+
+---
 
 Plan Review is a single review UI deployed across three surfaces — all sharing a core bundle built with **Preact** and **TypeScript**.
 
