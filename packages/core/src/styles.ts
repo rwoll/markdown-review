@@ -1,3 +1,27 @@
+const LIGHT_VARS = `
+  --bg-body:#f8f9fa;--bg-surface:#fff;--bg-elevated:#f0f0f0;--bg-code:#f6f8fa;
+  --bg-code-header:#eef1f5;--bg-hover:#e0e0e0;--bg-fab:#f0f0f0;--bg-fab-hover:#e0e0e0;
+  --bg-button:#e8e8e8;--bg-inverted:#111;--bg-inverted-hover:#333;
+  --bg-inline-code:rgba(0,0,0,.07);--bg-drag:#e8f0ff;
+  --text-heading:#111;--text-secondary:#333;--text-body:#555;--text-sub-heading:#444;
+  --text-muted:#666;--text-faint:#888;--text-dimmed:#999;--text-dimmed-hover:#555;
+  --text-ghost:#bbb;--text-input:#1a1a1a;--text-inline-code:#222;--text-inverted:#fff;
+  --text-code:#334;--text-code-meta:#6b8cb5;--text-code-meta-hover:#4a6d90;
+  --accent-purple:#8b5cf6;--accent-link:#0077cc;--accent-error:#dc3545;--accent-error-hover:#c82333;
+  --accent-blue:#0969da;--accent-blue-hover:#0550ae;
+  --border-subtle:rgba(0,0,0,.06);--border-light:rgba(0,0,0,.08);
+  --border-medium:rgba(0,0,0,.1);--border-strong:rgba(0,0,0,.12);
+  --border-accent:rgba(0,0,0,.15);--border-quote:#d0d0d0;--border-radio:#bbb;--border-button:#ccc;
+  --surface-hover:rgba(0,0,0,.03);--surface-subtle:rgba(0,0,0,.02);
+  --surface-selected:rgba(0,0,0,.05);--surface-handle:rgba(0,0,0,.1);
+  --surface-quote-border:rgba(0,0,0,.2);
+  --overlay-bg:rgba(0,0,0,.3);--overlay-outline:rgba(0,0,0,.2);--shadow-color:rgba(0,0,0,.1);
+  --flash-start:rgba(139,92,246,.12);
+  --copilot-dim-text:rgba(9,105,218,.6);--copilot-dim-border:rgba(9,105,218,.2);
+  --copilot-dim-bg:rgba(9,105,218,.06);--copilot-dim-text-hover:rgba(9,105,218,.75);
+  --copilot-dim-border-hover:rgba(9,105,218,.35);
+  --copilot-dl-bg:rgba(9,105,218,.1);--copilot-dl-bg-hover:rgba(9,105,218,.15)`;
+
 export const CSS_VARS = `
 :root {
   --bg-body:#111;--bg-surface:#161616;--bg-elevated:#1a1a1a;--bg-code:#0d1117;
@@ -23,30 +47,10 @@ export const CSS_VARS = `
   --copilot-dim-border-hover:rgba(56,132,255,.35);
   --copilot-dl-bg:rgba(56,132,255,.15);--copilot-dl-bg-hover:rgba(56,132,255,.22)
 }
-@media(prefers-color-scheme:light){:root{
-  --bg-body:#f8f9fa;--bg-surface:#fff;--bg-elevated:#f0f0f0;--bg-code:#f6f8fa;
-  --bg-code-header:#eef1f5;--bg-hover:#e0e0e0;--bg-fab:#f0f0f0;--bg-fab-hover:#e0e0e0;
-  --bg-button:#e8e8e8;--bg-inverted:#111;--bg-inverted-hover:#333;
-  --bg-inline-code:rgba(0,0,0,.07);--bg-drag:#e8f0ff;
-  --text-heading:#111;--text-secondary:#333;--text-body:#555;--text-sub-heading:#444;
-  --text-muted:#666;--text-faint:#888;--text-dimmed:#999;--text-dimmed-hover:#555;
-  --text-ghost:#bbb;--text-input:#1a1a1a;--text-inline-code:#222;--text-inverted:#fff;
-  --text-code:#334;--text-code-meta:#6b8cb5;--text-code-meta-hover:#4a6d90;
-  --accent-purple:#8b5cf6;--accent-link:#0077cc;--accent-error:#dc3545;--accent-error-hover:#c82333;
-  --accent-blue:#0969da;--accent-blue-hover:#0550ae;
-  --border-subtle:rgba(0,0,0,.06);--border-light:rgba(0,0,0,.08);
-  --border-medium:rgba(0,0,0,.1);--border-strong:rgba(0,0,0,.12);
-  --border-accent:rgba(0,0,0,.15);--border-quote:#d0d0d0;--border-radio:#bbb;--border-button:#ccc;
-  --surface-hover:rgba(0,0,0,.03);--surface-subtle:rgba(0,0,0,.02);
-  --surface-selected:rgba(0,0,0,.05);--surface-handle:rgba(0,0,0,.1);
-  --surface-quote-border:rgba(0,0,0,.2);
-  --overlay-bg:rgba(0,0,0,.3);--overlay-outline:rgba(0,0,0,.2);--shadow-color:rgba(0,0,0,.1);
-  --flash-start:rgba(139,92,246,.12);
-  --copilot-dim-text:rgba(9,105,218,.6);--copilot-dim-border:rgba(9,105,218,.2);
-  --copilot-dim-bg:rgba(9,105,218,.06);--copilot-dim-text-hover:rgba(9,105,218,.75);
-  --copilot-dim-border-hover:rgba(9,105,218,.35);
-  --copilot-dl-bg:rgba(9,105,218,.1);--copilot-dl-bg-hover:rgba(9,105,218,.15)
-}}
+/* System theme: light when OS says so, unless forced dark */
+@media(prefers-color-scheme:light){:root:not(.theme-dark){${LIGHT_VARS}}}
+/* Forced light (VS Code light theme with autoDetect off) */
+:root.theme-light{${LIGHT_VARS}}
 `;
 
 export const CSS = `${CSS_VARS}
@@ -89,9 +93,10 @@ body{background:var(--bg-body);color:var(--text-body);font-family:-apple-system,
 .code-body code{font-family:inherit;font-size:inherit;line-height:inherit;background:transparent}
 .code-body .shiki{background:transparent!important}
 
-/* Shiki dual-theme: dark by default, light via media query */
+/* Shiki dual-theme: dark by default, light via media query or forced class */
 .shiki,.shiki span{color:var(--shiki-dark)!important;background-color:transparent!important}
-@media(prefers-color-scheme:light){.shiki,.shiki span{color:var(--shiki-light)!important}}
+@media(prefers-color-scheme:light){:root:not(.theme-dark) .shiki,:root:not(.theme-dark) .shiki span{color:var(--shiki-light)!important}}
+.theme-light .shiki,.theme-light .shiki span{color:var(--shiki-light)!important}
 
 /* Mermaid diagrams */
 .mermaid-body{padding:16px;display:flex;justify-content:center;overflow-x:auto}

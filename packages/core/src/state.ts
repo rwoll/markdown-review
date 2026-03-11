@@ -30,6 +30,10 @@ export const questionAnswers = signal<Record<string, QuestionAnswer>>({});
 export const dismissed = signal<Record<string, boolean>>({});
 export const editing = signal<Record<string, boolean>>({});
 
+// Theme
+export type ThemeMode = 'system' | 'light' | 'dark';
+export const themeMode = signal<ThemeMode>('system');
+
 // Config
 export const feedbackMode = signal<'download' | 'post' | 'vscode'>('download');
 export const postUrl = signal<string>('');
@@ -100,4 +104,5 @@ export function resetState() {
   panelOpen.value = false;
   outlineOpen.value = false;
   fileName.value = 'PLAN.md';
+  themeMode.value = 'system';
 }
