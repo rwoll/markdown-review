@@ -20,6 +20,7 @@ export type { Element, BaseElement, CodeElement, QuestionElement } from './types
 export { extractElements } from './extract-elements.js';
 export { highlightCode } from './highlighter.js';
 export { resetState } from './state.js';
+export { CSS_VARS } from './styles.js';
 
 export interface PlanReviewOptions {
   container: HTMLElement;
@@ -36,7 +37,9 @@ export const PlanReview = {
     resetState();
     await initHighlighter();
     // Initialize bundled mermaid
-    mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+    const prefersLight = typeof window !== 'undefined'
+      && window.matchMedia('(prefers-color-scheme: light)').matches;
+    mermaid.initialize({ startOnLoad: false, theme: prefersLight ? 'default' : 'dark' });
     const tree = unified().use(remarkParse).use(remarkGfm).parse(options.markdown);
     elements.value = extractElements(tree);
     markdownSource.value = options.markdown;

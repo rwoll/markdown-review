@@ -1,7 +1,12 @@
 import { h, render } from 'preact';
 import { useState, useRef, useEffect } from 'preact/hooks';
-import { PlanReview } from '@plan-review/core';
+import { PlanReview, CSS_VARS } from '@plan-review/core';
 import { Upload, UploadResult } from './Upload';
+
+// Inject theme variables immediately so Upload screen can use them
+const _style = document.createElement('style');
+_style.textContent = CSS_VARS;
+document.head.appendChild(_style);
 
 function App() {
   const [file, setFile] = useState<UploadResult | null>(null);
@@ -43,7 +48,7 @@ function App() {
 
 const styles: Record<string, h.JSX.CSSProperties> = {
   root: {
-    background: '#111',
+    background: 'var(--bg-body)',
     minHeight: '100vh',
   },
   header: {
@@ -51,14 +56,14 @@ const styles: Record<string, h.JSX.CSSProperties> = {
     alignItems: 'center',
     gap: '12px',
     padding: '10px 20px',
-    borderBottom: '1px solid #222',
+    borderBottom: '1px solid var(--bg-hover)',
   },
   fileName: {
-    color: '#666',
+    color: 'var(--text-muted)',
     fontSize: '13px',
   },
   changeLink: {
-    color: '#6cf',
+    color: 'var(--accent-link)',
     fontSize: '13px',
     textDecoration: 'none',
     cursor: 'pointer',
