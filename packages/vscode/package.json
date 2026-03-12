@@ -38,6 +38,16 @@
     "README.md"
   ],
   "contributes": {
+    "configuration": {
+      "title": "Markdown Review",
+      "properties": {
+        "planReview.fileSuffix": {
+          "type": "string",
+          "default": ".spec.md",
+          "description": "File suffix that triggers the Plan Review editor (e.g. '.spec.md', '.review.md', or '.md' for all markdown files). The Copilot skill also uses this when creating review documents."
+        }
+      }
+    },
     "chatSkills": [
       {
         "path": "./markdown-plan-review-feedback/SKILL.md"
@@ -58,7 +68,7 @@
             "filenamePattern": "*.md"
           }
         ],
-        "priority": "default"
+        "priority": "option"
       }
     ],
     "menus": {

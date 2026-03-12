@@ -69,8 +69,8 @@ export function Upload({ onFile }: UploadProps) {
         onDragLeave={onDragLeave}
         style={{
           ...styles.dropZone,
-          borderColor: dragging ? '#6cf' : '#333',
-          background: dragging ? '#1a1a2e' : '#161616',
+          borderColor: dragging ? 'var(--accent-link)' : 'var(--border-quote)',
+          background: dragging ? 'var(--bg-drag)' : 'var(--bg-surface)',
         }}
       >
         <p style={styles.heading}>Drop your .md file here</p>
@@ -98,10 +98,10 @@ const styles: Record<string, h.JSX.CSSProperties> = {
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: '100vh',
-    background: '#111',
+    background: 'var(--bg-body)',
   },
   dropZone: {
-    border: '2px dashed #333',
+    border: '2px dashed var(--border-quote)',
     borderRadius: '12px',
     padding: '48px 64px',
     textAlign: 'center',
@@ -110,26 +110,26 @@ const styles: Record<string, h.JSX.CSSProperties> = {
     width: '100%',
   },
   heading: {
-    color: '#999',
+    color: 'var(--text-body)',
     fontSize: '18px',
     margin: '0 0 8px',
   },
   or: {
-    color: '#555',
+    color: 'var(--text-faint)',
     fontSize: '14px',
     margin: '0 0 16px',
   },
   button: {
-    background: '#2a2a2a',
-    color: '#ccc',
-    border: '1px solid #444',
+    background: 'var(--bg-button)',
+    color: 'var(--text-secondary)',
+    border: '1px solid var(--border-button)',
     borderRadius: '6px',
     padding: '8px 20px',
     fontSize: '14px',
     cursor: 'pointer',
   },
   error: {
-    color: '#f55',
+    color: 'var(--accent-error)',
     marginTop: '16px',
     fontSize: '14px',
   },

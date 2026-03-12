@@ -12,6 +12,7 @@ import {
   questionEls,
   answeredCount,
   markdownSource,
+  themeMode,
 } from '../state';
 import { CSS } from '../styles';
 import { MarkdownRenderer } from './MarkdownRenderer';
@@ -31,6 +32,15 @@ export function App() {
   const els = elements.value;
   const qEls = questionEls.value;
   const answered = answeredCount.value;
+
+  // Apply forced theme class on <html> for CSS variable overrides
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove('theme-light', 'theme-dark');
+    const mode = themeMode.value;
+    if (mode === 'light') root.classList.add('theme-light');
+    else if (mode === 'dark') root.classList.add('theme-dark');
+  }, [themeMode.value]);
 
   // Scroll-spy + progress bar
   useEffect(() => {

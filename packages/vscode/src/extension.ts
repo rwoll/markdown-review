@@ -21,10 +21,22 @@ function loadCoreBundle(): string {
   return coreBundle;
 }
 
+function resolveThemeMode(): 'system' | 'light' | 'dark' {
+  const autoDetect = vscode.workspace
+    .getConfiguration('window')
+    .get<boolean>('autoDetectColorScheme', false);
+  if (autoDetect) return 'system';
+  const kind = vscode.window.activeColorTheme.kind;
+  return (kind === vscode.ColorThemeKind.Light || kind === vscode.ColorThemeKind.HighContrastLight)
+    ? 'light'
+    : 'dark';
+}
+
 function buildWebviewHtml(webview: vscode.Webview, markdown: string, fileName: string, documentUri?: vscode.Uri): string {
   const coreBundle = loadCoreBundle();
   const nonce = getNonce();
   const escapedMarkdown = JSON.stringify(markdown);
+  const themeModeValue = resolveThemeMode();
 
   const cspSource = webview.cspSource;
   const baseTag = documentUri
@@ -37,6 +49,7 @@ function buildWebviewHtml(webview: vscode.Webview, markdown: string, fileName: s
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'nonce-${nonce}'; style-src 'unsafe-inline'; img-src 'self' ${cspSource} https: data:;">
+  <meta name="color-scheme" content="light dark">
   ${baseTag}
   <title>Plan Review: ${escapeHtml(fileName)}</title>
 </head>
@@ -50,6 +63,7 @@ function buildWebviewHtml(webview: vscode.Webview, markdown: string, fileName: s
       markdown: ${escapedMarkdown},
       fileName: ${JSON.stringify(fileName)},
       feedbackMode: 'vscode',
+      themeMode: ${JSON.stringify(themeModeValue)},
       onFeedback: function(payload) {
         vscode.postMessage({ type: 'feedback', payload: payload });
       },
@@ -102,8 +116,16 @@ class PlanReviewEditorProvider implements vscode.CustomTextEditorProvider {
       }
     });
 
+    // Re-render when VS Code theme or autoDetectColorScheme changes
+    const themeSubscription = vscode.window.onDidChangeActiveColorTheme(() => updateWebview());
+    const configSubscription = vscode.workspace.onDidChangeConfiguration((e) => {
+      if (e.affectsConfiguration('window.autoDetectColorScheme')) updateWebview();
+    });
+
     webviewPanel.onDidDispose(() => {
       changeSubscription.dispose();
+      themeSubscription.dispose();
+      configSubscription.dispose();
       if (cachedFeedback) {
         sendFeedbackToChat(cachedFeedback);
         cachedFeedback = null;
@@ -112,7 +134,48 @@ class PlanReviewEditorProvider implements vscode.CustomTextEditorProvider {
   }
 }
 
+const EDITOR_VIEW_TYPE = 'planReview.markdownEditor';
+
+/** Keep workbench.editorAssociations in sync with planReview.fileSuffix */
+async function syncEditorAssociation() {
+  const suffix = vscode.workspace
+    .getConfiguration('planReview')
+    .get<string>('fileSuffix', '.spec.md');
+  const pattern = `*${suffix}`;
+
+  const config = vscode.workspace.getConfiguration('workbench');
+  const current = config.get<Record<string, string>>('editorAssociations', {});
+  const updated = { ...current };
+
+  // Remove any existing association pointing to our editor
+  for (const key of Object.keys(updated)) {
+    if (updated[key] === EDITOR_VIEW_TYPE) {
+      delete updated[key];
+    }
+  }
+
+  // Add the new one
+  updated[pattern] = EDITOR_VIEW_TYPE;
+
+  // Only write if something actually changed
+  if (JSON.stringify(current) !== JSON.stringify(updated)) {
+    await config.update('editorAssociations', updated, vscode.ConfigurationTarget.Global);
+  }
+}
+
 export function activate(context: vscode.ExtensionContext) {
+  // Sync editor association on startup
+  syncEditorAssociation();
+
+  // Re-sync when the setting changes
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeConfiguration((e) => {
+      if (e.affectsConfiguration('planReview.fileSuffix')) {
+        syncEditorAssociation();
+      }
+    }),
+  );
+
   // Register custom editor for .md files
   const provider = new PlanReviewEditorProvider(context);
   context.subscriptions.push(
@@ -166,7 +229,17 @@ export function activate(context: vscode.ExtensionContext) {
     panel.webview.html = buildWebviewHtml(panel.webview, markdown, fileName, fileUri);
     setupMessageListener(panel.webview, context);
 
+    const updatePanel = () => {
+      panel.webview.html = buildWebviewHtml(panel.webview, markdown, fileName, fileUri);
+    };
+    const themeListener = vscode.window.onDidChangeActiveColorTheme(() => updatePanel());
+    const configListener = vscode.workspace.onDidChangeConfiguration((e) => {
+      if (e.affectsConfiguration('window.autoDetectColorScheme')) updatePanel();
+    });
+
     panel.onDidDispose(() => {
+      themeListener.dispose();
+      configListener.dispose();
       if (cachedFeedback) {
         sendFeedbackToChat(cachedFeedback);
         cachedFeedback = null;
