@@ -8,8 +8,8 @@
   <strong>A markdown viewer with inline commenting for the AI era — read any <code>.md</code> file, annotate sections, answer AI-embedded questions, and export structured feedback.</strong>
 </p>
 
-[![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install&color=0098FF)](vscode:extension/rwoll.markdown-review-vscode)
-[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install&color=24bfa5)](vscode-insiders:extension/rwoll.markdown-review-vscode)
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install&color=0098FF)](https://marketplace.visualstudio.com/items?itemName=rwoll.markdown-review-vscode)
+[![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install&color=24bfa5)](https://insiders.vscode.dev/redirect?url=vscode-insiders%3Aextension%2Frwoll.markdown-review-vscode)
 [![Copilot CLI Plugin Available](https://img.shields.io/badge/Copilot%20CLI%20Plugin-Available-24292f?logo=github)](#copilot-cli-plugin)
 [![npm version](https://img.shields.io/npm/v/markdown-review)](https://www.npmjs.com/package/markdown-review)
 
