@@ -53,6 +53,9 @@ function buildWebviewHtml(webview: vscode.Webview, markdown: string, fileName: s
       onFeedback: function(payload) {
         vscode.postMessage({ type: 'feedback', payload: payload });
       },
+      onTerminal: function(payload) {
+        vscode.postMessage({ type: 'terminal-feedback', payload: payload });
+      },
     }).catch(function(e) { console.error(e); });
   </script>
 </body>
@@ -68,6 +71,8 @@ function setupMessageListener(
       if (message.type === 'feedback') {
         cachedFeedback = message.payload;
         sendFeedbackToChat(message.payload);
+      } else if (message.type === 'terminal-feedback') {
+        sendFeedbackToTerminal(message.payload);
       }
     },
     undefined,
@@ -175,6 +180,18 @@ export function activate(context: vscode.ExtensionContext) {
   });
 
   context.subscriptions.push(disposable);
+}
+
+async function sendFeedbackToTerminal(feedback: any) {
+  const feedbackMd = typeof feedback === 'string' ? feedback : (feedback.feedbackMarkdown || JSON.stringify(feedback, null, 2));
+  const terminal = vscode.window.activeTerminal;
+  if (terminal) {
+    terminal.show();
+    terminal.sendText(feedbackMd, false);
+  } else {
+    await vscode.env.clipboard.writeText(feedbackMd);
+    vscode.window.showInformationMessage('No active terminal — feedback copied to clipboard.');
+  }
 }
 
 async function sendFeedbackToChat(feedback: any) {
