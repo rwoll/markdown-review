@@ -10,6 +10,7 @@ import {
   feedbackMode,
   postUrl,
   onFeedbackCallback,
+  onTerminalCallback,
   fileName,
   markdownSource,
   resetState,
@@ -28,6 +29,7 @@ export interface PlanReviewOptions {
   feedbackMode?: 'download' | 'post' | 'vscode';
   postUrl?: string;
   onFeedback?: (feedback: unknown) => void;
+  onTerminal?: (feedback: unknown) => void;
   showUpload?: boolean;
 }
 
@@ -44,6 +46,7 @@ export const PlanReview = {
     if (options.fileName) fileName.value = options.fileName;
     if (options.postUrl) postUrl.value = options.postUrl;
     if (options.onFeedback) onFeedbackCallback.value = options.onFeedback;
+    if (options.onTerminal) onTerminalCallback.value = options.onTerminal;
     render(<App />, options.container);
   },
 };
