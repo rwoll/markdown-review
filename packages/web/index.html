@@ -5,6 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:;">
   <title>Plan Review</title>
+  <style>
+    /* VS Code Dark 2026 tokens — applied before core bundle loads */
+    :root {
+      --pr-bg: #1f1f1f;
+      --pr-bg-2: #181818;
+      --pr-bg-3: #252526;
+      --pr-fg: #cccccc;
+      --pr-fg-2: #8b8b8b;
+      --pr-fg-3: #555555;
+      --pr-h1: #ffffff;
+      --pr-accent: #3794ff;
+      --pr-border: #454545;
+      --pr-border-subtle: rgba(255,255,255,0.07);
+      --pr-hover: rgba(255,255,255,0.04);
+      --pr-btn-bg: #0078d4;
+      --pr-btn-fg: #ffffff;
+      --pr-btn-hover: #026ec1;
+      --pr-input-bg: #313131;
+      --pr-input-fg: #cccccc;
+      --pr-input-border: rgba(255,255,255,0.1);
+      --pr-code-bg: #1e1e1e;
+      --pr-code-bg-2: #141414;
+      --pr-code-border: rgba(255,255,255,0.06);
+      --pr-progress: #0078d4;
+      --pr-badge-bg: #0078d4;
+      --pr-badge-fg: #ffffff;
+      --pr-error: #f14c4c;
+      --pr-toast-bg: #313131;
+      --pr-toast-border: rgba(255,255,255,0.08);
+      --pr-overlay: rgba(0,0,0,0.5);
+      --pr-shadow: rgba(0,0,0,0.6);
+    }
+    /* VS Code Light 2026 tokens */
+    [data-theme="light"] {
+      --pr-bg: #ffffff;
+      --pr-bg-2: #f3f3f3;
+      --pr-bg-3: #f0f0f0;
+      --pr-fg: #1f1f1f;
+      --pr-fg-2: #717171;
+      --pr-fg-3: #a0a0a0;
+      --pr-h1: #000000;
+      --pr-accent: #005fb8;
+      --pr-border: #c8c8c8;
+      --pr-border-subtle: rgba(0,0,0,0.08);
+      --pr-hover: rgba(0,0,0,0.04);
+      --pr-btn-bg: #005fb8;
+      --pr-btn-fg: #ffffff;
+      --pr-btn-hover: #0258a8;
+      --pr-input-bg: #ffffff;
+      --pr-input-fg: #1f1f1f;
+      --pr-input-border: rgba(0,0,0,0.2);
+      --pr-code-bg: #f5f5f5;
+      --pr-code-bg-2: #ebebeb;
+      --pr-code-border: rgba(0,0,0,0.08);
+      --pr-progress: #0090f1;
+      --pr-badge-bg: #005fb8;
+      --pr-badge-fg: #ffffff;
+      --pr-error: #e51400;
+      --pr-toast-bg: #f0f0f0;
+      --pr-toast-border: rgba(0,0,0,0.1);
+      --pr-overlay: rgba(0,0,0,0.25);
+      --pr-shadow: rgba(0,0,0,0.15);
+    }
+    html, body { margin: 0; padding: 0; background: var(--pr-bg); }
+  </style>
 </head>
 <body>
   <div id="app"></div>

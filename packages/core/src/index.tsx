@@ -12,6 +12,7 @@ import {
   onFeedbackCallback,
   onTerminalCallback,
   fileName,
+  theme,
   markdownSource,
   resetState,
 } from './state.js';
@@ -31,14 +32,18 @@ export interface PlanReviewOptions {
   onFeedback?: (feedback: unknown) => void;
   onTerminal?: (feedback: unknown) => void;
   showUpload?: boolean;
+  /** Visual theme: 'dark' for VS Code Dark 2026 (default), 'light' for VS Code Light 2026 */
+  theme?: 'dark' | 'light';
 }
 
 export const PlanReview = {
   async init(options: PlanReviewOptions): Promise<void> {
     resetState();
     await initHighlighter();
-    // Initialize bundled mermaid
-    mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+    const resolvedTheme = options.theme ?? 'dark';
+    theme.value = resolvedTheme;
+    // Initialize bundled mermaid with the appropriate theme
+    mermaid.initialize({ startOnLoad: false, theme: resolvedTheme === 'light' ? 'default' : 'dark' });
     const tree = unified().use(remarkParse).use(remarkGfm).parse(options.markdown);
     elements.value = extractElements(tree);
     markdownSource.value = options.markdown;

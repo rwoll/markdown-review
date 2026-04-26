@@ -33,6 +33,13 @@ const TerminalIcon = () => (
   </svg>
 );
 
+const ClipboardIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style={{ flexShrink: 0 }}>
+    <path d="M3.626 3.533a.249.249 0 0 0-.126.217v9.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-9.5a.249.249 0 0 0-.126-.217.75.75 0 0 1 .752-1.299c.541.313.874.89.874 1.516v9.5A1.75 1.75 0 0 1 12.25 15h-8.5A1.75 1.75 0 0 1 2 13.25v-9.5c0-.626.333-1.203.874-1.516a.75.75 0 0 1 .752 1.299Z" />
+    <path d="M5.75 1h4.5a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 4.75v-3A.75.75 0 0 1 5.75 1Zm.75 3h3V2.5h-3Z" />
+  </svg>
+);
+
 function togglePanel() {
   if (isDesktop()) return;
   panelOpen.value = !panelOpen.value;
@@ -186,6 +193,15 @@ function sendToTerminal() {
   if (cb) { cb(md); clearFeedback(); showToast('Sent to terminal ✓'); }
 }
 
+function copyToClipboard() {
+  const md = buildFeedbackMarkdown();
+  navigator.clipboard.writeText(md).then(() => {
+    showToast('Copied to clipboard ✓');
+  }).catch(() => {
+    showToast('Copy failed');
+  });
+}
+
 function getAnswerSummary(el: QuestionElement): string {
   const ans = questionAnswers.value[el.id];
   if (!ans) return '';
@@ -232,6 +248,7 @@ export function NotesPanel() {
             {feedbackMode.value === 'vscode' && onTerminalCallback.value && (
               <button class={`panel-terminal${hasContent ? ' terminal-active' : ''}`} onClick={sendToTerminal}><TerminalIcon /></button>
             )}
+            <button class={`panel-clipboard${hasContent ? ' clipboard-active' : ''}`} title="Copy to Clipboard" onClick={copyToClipboard}><ClipboardIcon /></button>
             <button class="panel-close" onClick={togglePanel}>×</button>
           </div>
         </div>
@@ -316,6 +333,7 @@ export function NotesPanel() {
             {feedbackMode.value === 'vscode' && onTerminalCallback.value && (
               <button class="panel-dl-terminal" onClick={sendToTerminal}><TerminalIcon /> Send to Terminal</button>
             )}
+            <button class="panel-dl-clipboard" onClick={copyToClipboard}><ClipboardIcon /> Copy to Clipboard</button>
             <div class="panel-dl-cap">Markdown · questions, snippets & comments</div>
           </div>
         )}
