@@ -1,6 +1,7 @@
 import { createHighlighterCore, type HighlighterCore } from 'shiki/core';
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
-import themeDarker from 'shiki/themes/material-theme-darker.mjs';
+import themeDarkPlus from 'shiki/themes/dark-plus.mjs';
+import themeLightPlus from 'shiki/themes/light-plus.mjs';
 import langTypescript from 'shiki/langs/typescript.mjs';
 import langPython from 'shiki/langs/python.mjs';
 import langJavascript from 'shiki/langs/javascript.mjs';
@@ -11,17 +12,18 @@ import langCss from 'shiki/langs/css.mjs';
 
 let highlighter: HighlighterCore | null = null;
 
-const THEME = 'material-theme-darker';
+const DARK_THEME = 'dark-plus';
+const LIGHT_THEME = 'light-plus';
 
 export async function initHighlighter(): Promise<void> {
   highlighter = await createHighlighterCore({
-    themes: [themeDarker],
+    themes: [themeDarkPlus, themeLightPlus],
     langs: [langTypescript, langPython, langJavascript, langJson, langBash, langHtml, langCss],
     engine: createJavaScriptRegexEngine(),
   });
 }
 
-export function highlightCode(code: string, lang: string): string | null {
+export function highlightCode(code: string, lang: string, theme: 'dark' | 'light' = 'dark'): string | null {
   if (!highlighter) {
     return null;
   }
@@ -31,6 +33,6 @@ export function highlightCode(code: string, lang: string): string | null {
 
   return highlighter.codeToHtml(code, {
     lang: effectiveLang,
-    theme: THEME,
+    theme: theme === 'light' ? LIGHT_THEME : DARK_THEME,
   });
 }

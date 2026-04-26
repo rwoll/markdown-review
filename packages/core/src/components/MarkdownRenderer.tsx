@@ -5,7 +5,7 @@ import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 import mermaid from 'mermaid';
 import { computed } from '@preact/signals';
 import { useRef, useEffect, useState } from 'preact/hooks';
-import { annotations, elements, sheetOpen, sheetTarget, editingGeneralIdx, dismissed } from '../state';
+import { annotations, elements, sheetOpen, sheetTarget, editingGeneralIdx, dismissed, theme } from '../state';
 import { highlightCode } from '../highlighter';
 import { QuestionBlock } from './QuestionBlock';
 import type { QuestionElement, CodeElement } from '../types';
@@ -221,7 +221,7 @@ const components: Components = {
             </button>
           </div>
           {(() => {
-            const html = highlightCode(code, lang);
+            const html = highlightCode(code, lang, theme.value);
             if (html) return <div class="code-body" dangerouslySetInnerHTML={{ __html: html }} />;
             return <div class="code-body"><pre><code>{code}</code></pre></div>;
           })()}

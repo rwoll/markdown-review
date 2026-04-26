@@ -10,9 +10,11 @@ export interface UploadResult {
 
 interface UploadProps {
   onFile: (result: UploadResult) => void;
+  theme?: 'dark' | 'light';
+  onToggleTheme?: () => void;
 }
 
-export function Upload({ onFile }: UploadProps) {
+export function Upload({ onFile, theme = 'dark', onToggleTheme }: UploadProps) {
   const [error, setError] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -62,20 +64,68 @@ export function Upload({ onFile }: UploadProps) {
   );
 
   return (
-    <div style={styles.wrapper}>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '100vh',
+      background: 'var(--pr-bg)',
+      position: 'relative',
+    }}>
+      {onToggleTheme && (
+        <div style={{ position: 'absolute', top: '16px', right: '20px' }}>
+          <button
+            onClick={onToggleTheme}
+            title={`Switch to ${theme === 'dark' ? 'Light 2026' : 'Dark 2026'} theme`}
+            style={{
+              background: 'none',
+              border: '1px solid var(--pr-border-subtle)',
+              borderRadius: '6px',
+              padding: '4px 10px',
+              fontSize: '12px',
+              cursor: 'pointer',
+              color: 'var(--pr-fg-2)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px',
+            }}
+          >
+            {theme === 'dark' ? '☀ Light 2026' : '🌙 Dark 2026'}
+          </button>
+        </div>
+      )}
       <div
         onDrop={onDrop}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         style={{
-          ...styles.dropZone,
-          borderColor: dragging ? '#6cf' : '#333',
-          background: dragging ? '#1a1a2e' : '#161616',
+          border: `2px dashed ${dragging ? 'var(--pr-accent)' : 'var(--pr-border)'}`,
+          borderRadius: '8px',
+          padding: '48px 64px',
+          textAlign: 'center',
+          transition: 'border-color 0.15s, background 0.15s',
+          maxWidth: '480px',
+          width: '100%',
+          background: dragging ? 'var(--pr-hover)' : 'transparent',
         }}
       >
-        <p style={styles.heading}>Drop your .md file here</p>
-        <p style={styles.or}>or</p>
-        <button style={styles.button} onClick={() => inputRef.current?.click()}>
+        <p style={{ color: 'var(--pr-fg-2)', fontSize: '18px', margin: '0 0 8px' }}>
+          Drop your .md file here
+        </p>
+        <p style={{ color: 'var(--pr-fg-3)', fontSize: '14px', margin: '0 0 16px' }}>or</p>
+        <button
+          style={{
+            background: 'var(--pr-btn-bg)',
+            color: 'var(--pr-btn-fg)',
+            border: 'none',
+            borderRadius: '6px',
+            padding: '8px 20px',
+            fontSize: '14px',
+            cursor: 'pointer',
+          }}
+          onClick={() => inputRef.current?.click()}
+        >
           Choose file
         </button>
         <input
@@ -86,51 +136,9 @@ export function Upload({ onFile }: UploadProps) {
           onChange={onPick}
         />
       </div>
-      {error && <p style={styles.error}>{error}</p>}
+      {error && (
+        <p style={{ color: 'var(--pr-error)', marginTop: '16px', fontSize: '14px' }}>{error}</p>
+      )}
     </div>
   );
 }
-
-const styles: Record<string, h.JSX.CSSProperties> = {
-  wrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '100vh',
-    background: '#111',
-  },
-  dropZone: {
-    border: '2px dashed #333',
-    borderRadius: '12px',
-    padding: '48px 64px',
-    textAlign: 'center',
-    transition: 'border-color 0.15s, background 0.15s',
-    maxWidth: '480px',
-    width: '100%',
-  },
-  heading: {
-    color: '#999',
-    fontSize: '18px',
-    margin: '0 0 8px',
-  },
-  or: {
-    color: '#555',
-    fontSize: '14px',
-    margin: '0 0 16px',
-  },
-  button: {
-    background: '#2a2a2a',
-    color: '#ccc',
-    border: '1px solid #444',
-    borderRadius: '6px',
-    padding: '8px 20px',
-    fontSize: '14px',
-    cursor: 'pointer',
-  },
-  error: {
-    color: '#f55',
-    marginTop: '16px',
-    fontSize: '14px',
-  },
-};

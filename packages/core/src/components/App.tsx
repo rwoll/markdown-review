@@ -12,6 +12,7 @@ import {
   questionEls,
   answeredCount,
   markdownSource,
+  theme,
 } from '../state';
 import { CSS } from '../styles';
 import { MarkdownRenderer } from './MarkdownRenderer';
@@ -115,7 +116,7 @@ export function App() {
   const allAnswered = qEls.length > 0 && answered === qEls.length;
 
   return (
-    <div>
+    <div data-theme={theme.value}>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <ScrollProgress progress={scrollProgress.value} />
       <Outline activeHeadingIdx={activeHeadingIdx.value} />

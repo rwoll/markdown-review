@@ -45,11 +45,13 @@ function buildWebviewHtml(webview: vscode.Webview, markdown: string, fileName: s
   <script nonce="${nonce}">${coreBundle}</script>
   <script nonce="${nonce}">
     const vscode = acquireVsCodeApi();
+    const detectedTheme = document.body.classList.contains('vscode-light') ? 'light' : 'dark';
     PlanReview.init({
       container: document.getElementById('app'),
       markdown: ${escapedMarkdown},
       fileName: ${JSON.stringify(fileName)},
       feedbackMode: 'vscode',
+      theme: detectedTheme,
       onFeedback: function(payload) {
         vscode.postMessage({ type: 'feedback', payload: payload });
       },

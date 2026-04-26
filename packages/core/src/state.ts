@@ -36,6 +36,7 @@ export const postUrl = signal<string>('');
 export const onFeedbackCallback = signal<((feedback: unknown) => void) | null>(null);
 export const onTerminalCallback = signal<((feedback: unknown) => void) | null>(null);
 export const fileName = signal<string>('PLAN.md');
+export const theme = signal<'dark' | 'light'>('dark');
 
 // Sheet state
 export const sheetOpen = signal(false);
@@ -101,6 +102,7 @@ export function resetState() {
   panelOpen.value = false;
   outlineOpen.value = false;
   fileName.value = 'PLAN.md';
+  theme.value = 'dark';
   onFeedbackCallback.value = null;
   onTerminalCallback.value = null;
 }
