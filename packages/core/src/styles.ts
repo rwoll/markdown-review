@@ -177,6 +177,15 @@ body{background:#111;color:#999;font-family:-apple-system,BlinkMacSystemFont,'Se
   font-size:13px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;margin-top:8px}
 .panel-dl-terminal:hover{color:#c9d1d9;border-color:rgba(139,148,158,.45);background:rgba(139,148,158,.08)}
 
+/* Clipboard buttons */
+.panel-clipboard{font-size:11px;color:#8b949e;background:none;border:1px solid rgba(139,148,158,.25);border-radius:6px;
+  padding:4px 8px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:4px;transition:all .2s}
+.panel-clipboard:hover{color:#c9d1d9;border-color:rgba(139,148,158,.45)}
+.panel-clipboard.clipboard-active{color:#c9d1d9;border-color:rgba(139,148,158,.4)}
+.panel-dl-clipboard{width:100%;padding:10px;border-radius:10px;background:none;color:#8b949e;border:1px solid rgba(139,148,158,.25);
+  font-size:13px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;margin-top:8px}
+.panel-dl-clipboard:hover{color:#c9d1d9;border-color:rgba(139,148,158,.45);background:rgba(139,148,158,.08)}
+
 /* Toast */
 .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
   background:#222;color:#ccc;font-size:13px;padding:8px 18px;border-radius:8px;opacity:0;
