@@ -203,6 +203,7 @@ function copyToClipboard() {
     }
   } catch (_e) { /* fall through to fallback */ }
   try {
+    // Fallback for environments without async Clipboard API (e.g. older webviews).
     const ta = document.createElement('textarea');
     ta.value = md;
     ta.setAttribute('readonly', '');
