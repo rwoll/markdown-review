@@ -33,6 +33,12 @@ const TerminalIcon = () => (
   </svg>
 );
 
+const ClipboardIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style={{ flexShrink: 0 }}>
+    <path d="M10 .75a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75V2H4.75A1.75 1.75 0 0 0 3 3.75v10.5c0 .966.784 1.75 1.75 1.75h6.5A1.75 1.75 0 0 0 13 14.25V3.75A1.75 1.75 0 0 0 11.25 2H10V.75ZM7.5 1.5h1V3h-1V1.5ZM4.5 3.75a.25.25 0 0 1 .25-.25H6v.25c0 .414.336.75.75.75h2.5A.75.75 0 0 0 10 3.75V3.5h1.25a.25.25 0 0 1 .25.25v10.5a.25.25 0 0 1-.25.25h-6.5a.25.25 0 0 1-.25-.25V3.75Z" />
+  </svg>
+);
+
 function togglePanel() {
   if (isDesktop()) return;
   panelOpen.value = !panelOpen.value;
@@ -186,6 +192,31 @@ function sendToTerminal() {
   if (cb) { cb(md); clearFeedback(); showToast('Sent to terminal ✓'); }
 }
 
+function copyToClipboard() {
+  const md = buildFeedbackMarkdown();
+  const done = () => { clearFeedback(); showToast('Copied to clipboard ✓'); };
+  const fail = () => showToast('Copy failed');
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(md).then(done).catch(fail);
+      return;
+    }
+  } catch (_e) { /* fall through to fallback */ }
+  try {
+    // Fallback for environments without async Clipboard API (e.g. older webviews).
+    const ta = document.createElement('textarea');
+    ta.value = md;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'absolute';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    if (ok) done(); else fail();
+  } catch (_e) { fail(); }
+}
+
 function getAnswerSummary(el: QuestionElement): string {
   const ans = questionAnswers.value[el.id];
   if (!ans) return '';
@@ -232,6 +263,7 @@ export function NotesPanel() {
             {feedbackMode.value === 'vscode' && onTerminalCallback.value && (
               <button class={`panel-terminal${hasContent ? ' terminal-active' : ''}`} onClick={sendToTerminal}><TerminalIcon /></button>
             )}
+            <button class={`panel-clipboard${hasContent ? ' clipboard-active' : ''}`} onClick={copyToClipboard} title="Copy to clipboard"><ClipboardIcon /></button>
             <button class="panel-close" onClick={togglePanel}>×</button>
           </div>
         </div>
@@ -316,6 +348,7 @@ export function NotesPanel() {
             {feedbackMode.value === 'vscode' && onTerminalCallback.value && (
               <button class="panel-dl-terminal" onClick={sendToTerminal}><TerminalIcon /> Send to Terminal</button>
             )}
+            <button class="panel-dl-clipboard" onClick={copyToClipboard}><ClipboardIcon /> Copy to Clipboard</button>
             <div class="panel-dl-cap">Markdown · questions, snippets & comments</div>
           </div>
         )}
